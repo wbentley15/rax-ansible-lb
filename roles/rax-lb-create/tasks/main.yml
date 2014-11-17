@@ -1,0 +1,16 @@
+---
+  
+- name: Load Balancer create request
+  rax_clb: name={{ lbname }} port={{ lbport }} protocol={{ lbproto }} algorithm={{ lbalgo }} type=PUBLIC api_key={{ raxkey }} username={{ raxuser }}
+           region={{ raxregion }} wait=yes state=present
+  register: raxlb
+  ignore_errors: True
+  
+- name: Load Balancer health check
+  fail: msg="Newly created Load Balancer not active, check cloud account!"
+  when: raxlb.balancer.status != 'ACTIVE'
+  
+- name: Create DNS record for Load Balancer
+  rax_dns_record: domain={{ domain }} name={{ lbfqdn }}.{{ domain }} data={{ raxlb.balancer.virtual_ips[0].address }} type=A
+                  api_key={{ raxkey }} username={{ raxuser }} region={{ raxregion }} state=present 
+  register: raxrecord

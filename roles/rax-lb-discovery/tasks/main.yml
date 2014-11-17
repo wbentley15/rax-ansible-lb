@@ -1,0 +1,7 @@
+---
+
+- name: Load Balancer discovery request
+  rax_clb: name={{ lbname }} port={{ lbport }} protocol={{ lbproto }} algorithm={{ lbalgo }}
+           api_key={{ raxkey }} username={{ raxuser }} region={{ raxregion }} wait=yes state=present
+  register: raxlb
+  ignore_errors: True

@@ -1,0 +1,9 @@
+---
+# This playbook used to dynamically create RAX Cloud LB and Cloud DNS. 
+
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  roles:
+    - rax-lb-create
+    - rax-lb-sslterm

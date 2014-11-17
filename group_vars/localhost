@@ -1,0 +1,13 @@
+# Here are variables related to the play
+
+lbname: lbtest01
+lbport: 80
+lbproto: HTTP
+lbalgo: LEAST_CONNECTIONS
+domain: 
+lbfqdn: lb01
+raxkey: 
+raxuser: 
+raxregion: IAD
+raxid: 
+ssljson: ~/rax-ansible-lb/add_sslterm.json
